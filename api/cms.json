@@ -25,7 +25,46 @@
             "in": "query",
             "name": "_format",
             "type": "string",
-            "default": "hal_json"
+            "enum": [
+              "json"
+            ],
+            "default": "json",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "type": "string",
+            "enum": [
+              "application/json"
+            ],
+            "default": "application/json",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/StringValue"
+                  }
+                },
+                "mail": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EmailValue"
+                  }
+                },
+                "pass": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
           }
         ],
         "tags": [
@@ -42,28 +81,133 @@
             "schema": {
               "type": "object",
               "properties": {
-                "status": {
-                  "$ref": "#/definitions/ApiResponseStatus"
+                "uid": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IntegerValue"
+                  }
                 },
-                "message": {
-                  "$ref": "#/definitions/ApiResponseMessage"
+                "uuid": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/UuidValue"
+                  }
                 },
-                "data": {
+                "name": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/StringValue"
+                  }
+                },
+                "created": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DateValue"
+                  }
+                },
+                "changed": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DateValue"
+                  }
+                },
+                "default_langcode": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/BooleanValue"
+                  }
+                },
+                "langcode": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/StringValue"
+                  }
+                },
+                "user_picture": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "",
+        "operationId": "",
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "_format",
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "default": "json",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "type": "string",
+            "enum": [
+              "application/json"
+            ],
+            "default": "application/json",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "default": "",
+                  "example": ""
+                },
+                "pass": {
+                  "type": "string",
+                  "default": "",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "csrf_token": {
+                  "type": "string"
+                },
+                "current_user": {
                   "type": "object",
                   "properties": {
-                    "skip": {
-                      "type": "integer",
-                      "example": 0
+                    "name": {
+                      "type": "string"
                     },
-                    "count": {
-                      "type": "integer",
-                      "example": 10
+                    "uid": {
+                      "type": "number"
                     },
-                    "list": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/User"
-                      }
+                    "roles": {
+                      "type": "array"
+                    },
+                    "logout_token": {
+                      "type": "string"
                     }
                   }
                 }
@@ -123,20 +267,62 @@
         }
       }
     },
-    "ApiResponseStatus": {
-      "type": "integer",
-      "format": "int32",
-      "enum": [
-        200,
-        400
-      ]
+    "DateValue": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
-    "ApiResponseMessage": {
-      "type": "string",
-      "enum": [
-        "Success",
-        "Error"
-      ]
+    "IntegerValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "int32"
+        }
+      }
+    },
+    "UuidValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "StringValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "EmailValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "email",
+          "example": ""
+        }
+      }
+    },
+    "BooleanValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean"
+        }
+      }
     }
   }
 }
