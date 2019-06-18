@@ -58,10 +58,6 @@
                   "items": {
                     "$ref": "#/definitions/EmailValue"
                   }
-                },
-                "pass": {
-                  "type": "string",
-                  "example": ""
                 }
               }
             }
