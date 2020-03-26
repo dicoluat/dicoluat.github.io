@@ -1,15 +1,5 @@
-/*
-
-	Theme Name: CompleteBusiness
-	Description: Responsive Corporate xHTML template 
-	Version: 1.0.0
-	
-	-
-	
-*/
-
-	@import url('_layout/base.css');
-	@import url('_layout/grid.css');
-	@import url('_layout/layout.css');
+@import url('layout/base.css');
+@import url('layout/grid.css');
+@import url('layout/layout.css');
 
 
