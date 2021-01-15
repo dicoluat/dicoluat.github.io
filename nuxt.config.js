@@ -50,9 +50,6 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    extend(config, ctx) { },
-    analyze: true,
-    transpile: [ ({ isClient }) => isClient && "vee-validate/dist/rules" ],
     babel: { compact: true }
   },
 }
