@@ -2,6 +2,7 @@
   <div class="container">
     <div>
       <h1 class="title">dicol</h1>
+      <p>Coming soon</p>
     </div>
   </div>
 </template>
